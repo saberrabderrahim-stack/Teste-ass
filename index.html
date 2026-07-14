@@ -310,7 +310,7 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
         <button onclick="toggleSection('reseau-content')" class="accordion-btn w-full flex justify-between items-center p-3.5 text-left">
           <span class="flex items-center gap-2 font-bold text-sm" style="color:var(--srm-text)">
             <span class="section-header-icon" style="background:var(--srm-blue-light);color:var(--srm-blue)"><i class="fa-solid fa-network-wired"></i></span>
-            1 — Réseau Principal & Vannes
+            1 — Réseau Principal & Regards
           </span>
           <i class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform" id="reseau-content-icon"></i>
         </button>
@@ -398,14 +398,10 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
         <div id="branchements-content" class="accordion-content">
           <form onsubmit="handleFormSubmit(event,'Branchements')" class="p-4 border-t space-y-3" style="border-color:var(--srm-border)">
             <input type="hidden" class="record-id">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 gap-3">
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Tronçon / Section <span class="text-red-500">*</span></label>
                 <input type="text" required class="field-section srm-input" placeholder="Ex: Bd Zerktouni - Section B">
-              </div>
-              <div>
-                <label class="block text-xs font-bold mb-1.5 text-gray-600">N° Branchement</label>
-                <input type="number" min="0" placeholder="Entrer le(s) numéro(s)" class="field-nbranchement srm-input font-mono-custom">
               </div>
             </div>
             <div class="grid grid-cols-2 gap-3">
@@ -416,12 +412,6 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
               <div class="p-3 rounded-xl border" style="background:var(--srm-green-light);border-color:#b3e0ba">
                 <label class="block text-xs font-black mb-2" style="color:var(--srm-green-dark)">Branchements DN 300 (unités)</label>
                 <input type="number" min="0" placeholder="0" class="field-br-dn50 srm-input font-mono-custom bg-white">
-              </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur (m)</label>
-                <input type="number" step="0.01" min="0" placeholder="0.00" class="field-br-profondeur srm-input font-mono-custom">
               </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -531,27 +521,15 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
                 <input type="number" step="0.01" required class="field-distance srm-input font-mono-custom" placeholder="0.00">
               </div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Entre R</label>
                 <input type="number" class="field-entre-r srm-input font-mono-custom" placeholder="N° regard">
               </div>
               <div>
-                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur R (m)</label>
-                <input type="number" step="0.01" min="0" oninput="updateProfMoyenne(this)" class="field-entre-r-prof srm-input font-mono-custom" placeholder="0.00">
-              </div>
-              <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Et R</label>
                 <input type="number" class="field-et-r srm-input font-mono-custom" placeholder="N° regard">
               </div>
-              <div>
-                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur R (m)</label>
-                <input type="number" step="0.01" min="0" oninput="updateProfMoyenne(this)" class="field-et-r-prof srm-input font-mono-custom" placeholder="0.00">
-              </div>
-            </div>
-            <div class="p-2.5 rounded-xl flex items-center justify-between" style="background:#fce7f3;border:1px solid #f9a8d4">
-              <span class="text-xs font-bold" style="color:#9d174d"><i class="fa-solid fa-ruler-vertical mr-1"></i>Profondeur Moyenne</span>
-              <span class="field-prof-moyenne text-sm font-black" style="color:#9d174d">0.00 m</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
@@ -855,7 +833,7 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
                 <th class="p-2.5 font-bold">% Branch.</th>
                 <th class="p-2.5 font-bold">Remise (m)</th>
                 <th class="p-2.5 font-bold">Racc. (u)</th>
-                <th class="p-2.5 font-bold">Vannes (u)</th>
+                <th class="p-2.5 font-bold">Regards (u)</th>
                 <th class="p-2.5 font-bold">Avt. Global</th>
                 <th class="p-2.5 font-bold">Jours actifs</th>
                 <th class="p-2.5 font-bold">Budget Consommé (DH)</th>
@@ -1229,8 +1207,9 @@ function buildWorkbook(){
     ["════ 4. MISE EN SERVICE ════"],[" Composant"," Total"],
     [" DN32 — Jonctions",c.service.j32],[" DN32 — 1 Compteur",c.service.c1_32],[" DN32 — 2 Compteurs",c.service.c2_32],[" DN32 — 3 Compteurs",c.service.c3_32],
     [" DN50 — Jonctions",c.service.j50],[" DN50 — 1 Compteur",c.service.c1_50],[" DN50 — 2 Compteurs",c.service.c2_50],[" DN50 — 3 Compteurs",c.service.c3_50],[],
-    ["════ 5. VANNES ════"],[" Type"," Quantité"],
-    [" Vanne <= 150",c.vannes.v150],[" Vanne <= 300",c.vannes.v300],[],
+    ["════ 5. REGARDS & TYPE DE RÉSEAU ════"],[" Indicateur"," Valeur"],
+    [" Regards recensés (Entre R / Et R)",c.regards.nb],[" Profondeur moyenne des regards (m)",c.regards.profMoy.toFixed(2)],
+    [" Linéaire EU (m)",c.regards.eu.toFixed(2)],[" Linéaire EP (m)",c.regards.ep.toFixed(2)],[" Linéaire Mixte (m)",c.regards.mix.toFixed(2)],[],
     ["════ 6. RACCORDEMENTS ════"],[" Type"," Quantité"],
     [" Raccordement <= 200",c.raccordements.r200],[" Raccordement <= 300",c.raccordements.r300]
   ];
@@ -1261,8 +1240,10 @@ function buildWorkbook(){
       'Réseau DN 600':(r.category==='Réseau'&&r.dn=='600')?r.distance:0,
       'Réseau DN 800':(r.category==='Réseau'&&r.dn=='800')?r.distance:0,
       'Réseau DN 1000':(r.category==='Réseau'&&r.dn=='1000')?r.distance:0,
-      'Vanne <=150':r.category==='Réseau'?(r.v150_qty||0):0,
-      'Vanne <=300':r.category==='Réseau'?(r.v300_qty||0):0,
+      'Type EU/EP':r.category==='Réseau'?(r.typeEuEp||''):'',
+      'Entre R':(r.category==='Réseau'||r.category==='Essais')?(r.entreR||''):'',
+      'Et R':(r.category==='Réseau'||r.category==='Essais')?(r.etR||''):'',
+      'Profondeur Moy. Regards (m)':(r.category==='Réseau'||r.category==='Essais')?(((r.profEntre||0)>0&&(r.profEt||0)>0)?(((r.profEntre+r.profEt)/2).toFixed(2)):((r.profEntre||r.profEt||0).toFixed(2))):'',
       'Branchement DN 32':r.category==='Branchements'?(r.br_dn32_qty||0):0,
       'Branchement DN 50':r.category==='Branchements'?(r.br_dn50_qty||0):0,
       'Remise en État (m)':r.category==='Remise en état'?r.distance:0,
@@ -1506,9 +1487,9 @@ async function _doPDF(qrDataUrl){
      ['Racc <= 200',c.raccordements.r200+' u'],['Racc <= 300',c.raccordements.r300+' u']],[99,60,180]);
   chartAt(chartImgs[3],cY4,yL-cY4-2.5);
 
-  // 5. Vannes
-  yL=secBar(colL,yL,colW,'5. VANNES',[60,110,160]);
-  yL=tbl(colL,yL,colW,['Type','Qté'],[['Vanne <= 150',c.vannes.v150+' u'],['Vanne <= 300',c.vannes.v300+' u']],[60,110,160]);
+  // 5. Regards & Type de Réseau
+  yL=secBar(colL,yL,colW,'5. REGARDS & TYPE DE RESEAU',[60,110,160]);
+  yL=tbl(colL,yL,colW,['Indicateur','Valeur'],[['Regards recenses',c.regards.nb+' u'],['Prof. moyenne regards',c.regards.profMoy.toFixed(2)+' m'],['Lineaire EU',c.regards.eu.toFixed(2)+' m'],['Lineaire EP',c.regards.ep.toFixed(2)+' m']],[60,110,160]);
 
   // ── Calculs d'avancement (réutilisés sur la page Délai) ──
   const tL=Object.values(c.reseau).reduce((a,b)=>a+b,0);
@@ -2134,8 +2115,6 @@ function handleFormSubmit(e,category){
     if(dn)da.push('DN '+dn);let vns=[];if(v15)vns.push('<=150: '+v15+' u');if(v30)vns.push('<=300: '+v30+' u');if(vns.length)da.push('[Vannes: '+vns.join(', ')+']');
   }else if(category==='Branchements'){
     br32=+form.querySelector('.field-br-dn32').value||0;br50=+form.querySelector('.field-br-dn50').value||0;
-    nBr=form.querySelector('.field-nbranchement')?.value.trim()||'';if(nBr)da.push('N° Branchement: '+nBr);
-    brProf=+form.querySelector('.field-br-profondeur')?.value||0;if(brProf)da.push('Profondeur: '+brProf.toFixed(2)+'m');
     da.push('DN200: '+br32+' u');da.push('DN300: '+br50+' u');
   }else if(category==='Remise en état'){
     remT=form.querySelector('.field-remise-type').value;if(remT)da.push('Revêtement: '+remT);
@@ -2154,10 +2133,7 @@ function handleFormSubmit(e,category){
     if(rad){let t='Type: '+rad.value;if(rad.value==='identification'){const s=form.querySelector('.field-essai-sub-type').value;if(s)t+=' ('+s+')';}da.push(t);}
     entreR=form.querySelector('.field-entre-r')?.value.trim()||'';
     etR=form.querySelector('.field-et-r')?.value.trim()||'';
-    profEntre=+form.querySelector('.field-entre-r-prof')?.value||0;
-    profEt=+form.querySelector('.field-et-r-prof')?.value||0;
     if(entreR||etR)da.push('Entre R'+(entreR||'—')+' et R'+(etR||'—'));
-    if(profEntre||profEt){const pm=(profEntre>0&&profEt>0)?(profEntre+profEt)/2:(profEntre||profEt);da.push('Profondeur: '+profEntre.toFixed(2)+'m / '+profEt.toFixed(2)+'m (moy. '+pm.toFixed(2)+'m)');}
   }
   const details=da.join(' | ');
   const saisiePar=currentUser?(USERS[currentUser]?.displayName||currentUser):'';
@@ -2509,14 +2485,25 @@ function renderDelaiAnalysis(c, globalPct){
   content.innerHTML = html;
 }
 function getAggregatedCumuls(){
-  let res={'200':0,'300':0,'400':0,'600':0,'800':0,'1000':0},branch={DN32:0,DN50:0},remise={'Chaussée':0,'Pavé':0,'Carrelage O':0,'Carrelage S':0,'Béton':0,'Asphalte N':0},service={j32:0,c1_32:0,c2_32:0,c3_32:0,j50:0,c1_50:0,c2_50:0,c3_50:0},vannes={v150:0,v300:0},racc={r200:0,r300:0};
+  let res={'200':0,'300':0,'400':0,'600':0,'800':0,'1000':0},branch={DN32:0,DN50:0},remise={'Chaussée':0,'Pavé':0,'Carrelage O':0,'Carrelage S':0,'Béton':0,'Asphalte N':0},service={j32:0,c1_32:0,c2_32:0,c3_32:0,j50:0,c1_50:0,c2_50:0,c3_50:0},racc={r200:0,r300:0};
+  let regardsSet=new Set(),profSum=0,profCount=0,euTotal=0,epTotal=0,mixTotal=0;
   records.forEach(r=>{
-    if(r.category==='Réseau'){if(r.dn)res[r.dn]+=(r.distance||0);vannes.v150+=(r.v150_qty||0);vannes.v300+=(r.v300_qty||0);}
+    if(r.category==='Réseau'){
+      if(r.dn)res[r.dn]+=(r.distance||0);
+      if(r.typeEuEp==='EU')euTotal+=(r.distance||0);else if(r.typeEuEp==='EP')epTotal+=(r.distance||0);else if(r.typeEuEp==='Mix')mixTotal+=(r.distance||0);
+    }
+    if(r.category==='Réseau'||r.category==='Essais'){
+      if(r.entreR)regardsSet.add(r.entreR);
+      if(r.etR)regardsSet.add(r.etR);
+      if(r.profEntre){profSum+=r.profEntre;profCount++;}
+      if(r.profEt){profSum+=r.profEt;profCount++;}
+    }
     if(r.category==='Branchements'){branch.DN32+=(r.br_dn32_qty||0);branch.DN50+=(r.br_dn50_qty||0);}
     if(r.category==='Remise en état'&&r.remise_type&&remise[r.remise_type]!==undefined)remise[r.remise_type]+=(r.distance||0);
     if(r.category==='Mise en service'&&r.ms_data){service.j32+=(r.ms_data.j32||0);service.c1_32+=(r.ms_data.c1_32||0);service.c2_32+=(r.ms_data.c2_32||0);service.c3_32+=(r.ms_data.c3_32||0);service.j50+=(r.ms_data.j50||0);service.c1_50+=(r.ms_data.c1_50||0);service.c2_50+=(r.ms_data.c2_50||0);service.c3_50+=(r.ms_data.c3_50||0);racc.r200+=(r.ms_data.r200||0);racc.r300+=(r.ms_data.r300||0);}
   });
-  return{reseau:res,branch,remise,service,vannes,raccordements:racc};
+  const regards={nb:regardsSet.size,profMoy:profCount?(profSum/profCount):0,eu:euTotal,ep:epTotal,mix:mixTotal};
+  return{reseau:res,branch,remise,service,regards,raccordements:racc};
 }
 function renderTable(){
   const tb=document.getElementById('data-table-body');const nd=document.getElementById('no-data-msg');tb.innerHTML='';
@@ -2557,7 +2544,7 @@ function editRecord(id){
   if(r.notes&&r.notes.startsWith('Autre: ')){if(sd)sd.value='Autre';if(cb)cb.classList.remove('hidden');if(ci)ci.value=r.notes.replace('Autre: ','');}
   else{if(sd)sd.value=(r.notes==='RAS'?'':r.notes||'');if(cb)cb.classList.add('hidden');if(ci)ci.value='';}
   if(r.category==='Réseau'){if(form.querySelector('.field-dn'))form.querySelector('.field-dn').value=r.dn||'';if(form.querySelector('.field-v150'))form.querySelector('.field-v150').value=r.v150_qty||'';if(form.querySelector('.field-v300'))form.querySelector('.field-v300').value=r.v300_qty||'';if(form.querySelector('.field-entre-r'))form.querySelector('.field-entre-r').value=r.entreR||'';if(form.querySelector('.field-et-r'))form.querySelector('.field-et-r').value=r.etR||'';if(form.querySelector('.field-entre-r-prof'))form.querySelector('.field-entre-r-prof').value=r.profEntre||'';if(form.querySelector('.field-et-r-prof'))form.querySelector('.field-et-r-prof').value=r.profEt||'';const _pmEl=form.querySelector('.field-entre-r-prof');if(_pmEl)updateProfMoyenne(_pmEl);const _euEp=form.querySelector('input[name="reseau-type-eu-ep"][value="'+(r.typeEuEp||'')+'"]');if(_euEp)_euEp.checked=true;}
-  else if(r.category==='Branchements'){form.querySelector('.field-br-dn32').value=r.br_dn32_qty||'';form.querySelector('.field-br-dn50').value=r.br_dn50_qty||'';if(form.querySelector('.field-nbranchement'))form.querySelector('.field-nbranchement').value=r.nBranchement||'';if(form.querySelector('.field-br-profondeur'))form.querySelector('.field-br-profondeur').value=r.br_profondeur||'';}
+  else if(r.category==='Branchements'){form.querySelector('.field-br-dn32').value=r.br_dn32_qty||'';form.querySelector('.field-br-dn50').value=r.br_dn50_qty||'';}
   else if(r.category==='Remise en état'&&form.querySelector('.field-remise-type'))form.querySelector('.field-remise-type').value=r.remise_type||'';
   else if(r.category==='Mise en service'&&r.ms_data){
     form.querySelector('.field-ms-dn32-jonction').value=r.ms_data.j32||'';form.querySelector('.field-ms-dn32-c1').value=r.ms_data.c1_32||'';form.querySelector('.field-ms-dn32-c2').value=r.ms_data.c2_32||'';form.querySelector('.field-ms-dn32-c3').value=r.ms_data.c3_32||'';
@@ -2643,13 +2630,19 @@ function getFilteredCumuls(from, to){
     remise:{},
     service:{j32:0,c1_32:0,c2_32:0,c3_32:0,j50:0,c1_50:0,c2_50:0,c3_50:0},
     raccordements:{r200:0,r300:0},
-    vannes:{v150:0,v300:0},
+    regards:{nb:0,profMoy:0,eu:0,ep:0,mix:0},
     essais:0
   };
+  let _regSet=new Set(),_profSum=0,_profCnt=0;
   filtered.forEach(r=>{
     if(r.category==='Réseau'){
       if(r.dn && c.reseau[r.dn]!==undefined) c.reseau[r.dn]+=(r.distance||0);
-      c.vannes.v150+=(r.v150_qty||0); c.vannes.v300+=(r.v300_qty||0);
+      if(r.typeEuEp==='EU')c.regards.eu+=(r.distance||0);else if(r.typeEuEp==='EP')c.regards.ep+=(r.distance||0);else if(r.typeEuEp==='Mix')c.regards.mix+=(r.distance||0);
+    }
+    if(r.category==='Réseau'||r.category==='Essais'){
+      if(r.entreR)_regSet.add(r.entreR);if(r.etR)_regSet.add(r.etR);
+      if(r.profEntre){_profSum+=r.profEntre;_profCnt++;}
+      if(r.profEt){_profSum+=r.profEt;_profCnt++;}
     }
     if(r.category==='Branchements'){c.branch.DN32+=(r.br_dn32_qty||0);c.branch.DN50+=(r.br_dn50_qty||0);}
     if(r.category==='Remise en état'){const t=r.remise_type||'Autre';c.remise[t]=(c.remise[t]||0)+(r.distance||0);}
@@ -2661,6 +2654,7 @@ function getFilteredCumuls(from, to){
     }
     if(r.category==='Essais') c.essais+=(r.distance||0);
   });
+  c.regards.nb=_regSet.size;c.regards.profMoy=_profCnt?(_profSum/_profCnt):0;
   return {cumuls:c, filtered};
 }
 
@@ -2840,9 +2834,9 @@ async function _doStatsPDF(qrDataUrl, c, filtered, proj, uname, from, to, dateSt
      ['Racc ≤ 200',c.raccordements.r200+' u'],['Racc ≤ 300',c.raccordements.r300+' u']],P);
   chartAtS(chartImgsS[3],cY4S,yL-cY4S-2.5);
 
-  // 5. Vannes
-  yL=secBar(colL,yL,colW,'5. VANNES',[60,110,160]);
-  yL=tbl(colL,yL,colW,['Type','Qté'],[['Vanne ≤ 150',c.vannes.v150+' u'],['Vanne ≤ 300',c.vannes.v300+' u']],[60,110,160]);
+  // 5. Regards & Type de reseau
+  yL=secBar(colL,yL,colW,'5. REGARDS & TYPE DE RESEAU',[60,110,160]);
+  yL=tbl(colL,yL,colW,['Indicateur','Valeur'],[['Regards recenses',c.regards.nb+' u'],['Prof. moyenne regards',c.regards.profMoy.toFixed(2)+' m'],['Lineaire EU',c.regards.eu.toFixed(2)+' m'],['Lineaire EP',c.regards.ep.toFixed(2)+' m']],[60,110,160]);
 
   // ── Calcul avancement (réutilisé sur la page Délai) ──
   const pctV=(v,t)=>t>0?Math.min(100,v/t*100):0;
@@ -3428,12 +3422,18 @@ function mpGetCumuls(records){
   const remise = {};
   const service = {j32:0,c1_32:0,c2_32:0,c3_32:0,j50:0,c1_50:0,c2_50:0,c3_50:0};
   const racc = {r200:0, r300:0};
-  const vannes = {v150:0, v300:0};
+  const regards = {nb:0, profMoy:0, eu:0, ep:0, mix:0};
+  let _regSet=new Set(), _profSum=0, _profCnt=0;
 
   records.forEach(r => {
     if(r.category === 'Réseau'){
       if(r.dn && res[r.dn] !== undefined) res[r.dn] += (r.distance||0);
-      vannes.v150 += (r.v150_qty||0); vannes.v300 += (r.v300_qty||0);
+      if(r.typeEuEp==='EU')regards.eu+=(r.distance||0);else if(r.typeEuEp==='EP')regards.ep+=(r.distance||0);else if(r.typeEuEp==='Mix')regards.mix+=(r.distance||0);
+    }
+    if(r.category === 'Réseau' || r.category === 'Essais'){
+      if(r.entreR)_regSet.add(r.entreR);if(r.etR)_regSet.add(r.etR);
+      if(r.profEntre){_profSum+=r.profEntre;_profCnt++;}
+      if(r.profEt){_profSum+=r.profEt;_profCnt++;}
     }
     if(r.category === 'Branchements'){ branch.DN32 += (r.br_dn32_qty||0); branch.DN50 += (r.br_dn50_qty||0); }
     if(r.category === 'Remise en état'){ const t = r.remise_type||'Autre'; remise[t] = (remise[t]||0) + (r.distance||0); }
@@ -3444,7 +3444,8 @@ function mpGetCumuls(records){
       racc.r200+=m.r200||0; racc.r300+=m.r300||0;
     }
   });
-  return { reseau:res, branch, remise, service, vannes, raccordements:racc };
+  regards.nb=_regSet.size; regards.profMoy=_profCnt?(_profSum/_profCnt):0;
+  return { reseau:res, branch, remise, service, regards, raccordements:racc };
 }
 
 function mpGetAvancement(cumuls, targets){
@@ -3827,7 +3828,7 @@ function mpRenderTable(results){
     const g = r.avt.global.toFixed(1)+'%';
     const pR = pct(r.avt.tL, r.targets.linearReseau);
     const pB = pct(r.avt.tB, r.targets.branchements);
-    const van = r.cumuls.vannes.v150+r.cumuls.vannes.v300;
+    const van = r.cumuls.regards.nb;
     const f = r.budget || {totalConsomme:0,totalBudget:0,pctTotal:0};
     const pBudget = f.totalBudget>0 ? f.pctTotal.toFixed(0)+'%' : '—';
     const coutM = r.avt.tL>0 ? mpFmtDH(f.totalConsomme/r.avt.tL) : '—';
@@ -3856,7 +3857,7 @@ function mpRenderTable(results){
   const totB = results.reduce((s,r)=>s+r.avt.tB,0);
   const totRem = results.reduce((s,r)=>s+r.avt.tRem,0);
   const totRac = results.reduce((s,r)=>s+r.avt.tRac,0);
-  const totVan = results.reduce((s,r)=>s+r.cumuls.vannes.v150+r.cumuls.vannes.v300,0);
+  const totVan = results.reduce((s,r)=>s+r.cumuls.regards.nb,0);
   const avgAvt = (results.reduce((s,r)=>s+r.avt.global,0)/results.length).toFixed(1)+'%';
   const totConsomme = results.reduce((s,r)=>s+(r.budget?r.budget.totalConsomme:0),0);
   const totBudgetCible = results.reduce((s,r)=>s+(r.budget?r.budget.totalBudget:0),0);
@@ -3990,13 +3991,13 @@ function _mpDoPDF(qrDU, results, uname, dateStr, timeStr){
     r.avt.tL.toFixed(2),String(r.targets.linearReseau),pct(r.avt.tL,r.targets.linearReseau),
     String(r.avt.tB),String(r.targets.branchements),pct(r.avt.tB,r.targets.branchements),
     r.avt.tRem.toFixed(2),String(r.avt.tRac),
-    String(r.cumuls.vannes.v150+r.cumuls.vannes.v300),
+    String(r.cumuls.regards.nb),
     r.avt.global.toFixed(1)+'%',
     String(new Set(r.records.map(rec=>rec.dateStr).filter(Boolean)).size)
   ]);
 
   doc.autoTable({
-    head:[['Projet','Réseau(m)','Obj.R','%R','Branch.','Obj.B','%B','Remise(m)','Racc.','Vannes','Avt.%','Jours']],
+    head:[['Projet','Réseau(m)','Obj.R','%R','Branch.','Obj.B','%B','Remise(m)','Racc.','Regards','Avt.%','Jours']],
     body:tableBody,startY:Y,
     styles:{fontSize:6.5,cellPadding:1.8},
     headStyles:{fillColor:PU,textColor:[255,255,255],fontStyle:'bold',fontSize:7},
