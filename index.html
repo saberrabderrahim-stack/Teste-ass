@@ -220,20 +220,13 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
         </div>
       </div>
 
-      <!-- Branchements + Vannes + Raccordements -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t" style="border-color:var(--srm-border)">
+      <!-- Branchements + Raccordements -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t" style="border-color:var(--srm-border)">
         <div>
-          <p class="text-[10px] font-bold uppercase tracking-wider mb-2 flex items-center gap-1" style="color:var(--srm-green-dark)"><i class="fa-solid fa-faucet"></i> Branchements</p>
+          <p class="text-[10px] font-bold uppercase tracking-wider mb-2 flex items-center gap-1" style="color:var(--srm-green-dark)"><i class="fa-solid fa-toilet"></i> Branchements</p>
           <div class="grid grid-cols-2 gap-2">
             <div class="stat-card stat-card-green"><span class="text-[9px] font-bold block mb-1" style="color:var(--srm-green-dark)">DN 32</span><span id="stat-br-dn32" class="text-base font-black" style="color:var(--srm-green-dark)">0</span><span class="text-[9px] text-gray-500"> u</span></div>
             <div class="stat-card stat-card-green"><span class="text-[9px] font-bold block mb-1" style="color:var(--srm-green-dark)">DN 50</span><span id="stat-br-dn50" class="text-base font-black" style="color:var(--srm-green-dark)">0</span><span class="text-[9px] text-gray-500"> u</span></div>
-          </div>
-        </div>
-        <div>
-          <p class="text-[10px] font-bold uppercase tracking-wider mb-2 flex items-center gap-1 text-purple-700"><i class="fa-solid fa-circle-dot"></i> Vannes</p>
-          <div class="grid grid-cols-2 gap-2">
-            <div class="stat-card stat-card-purple"><span class="text-[9px] font-bold block mb-1 text-purple-700">≤ 150</span><span id="stat-vn150" class="text-base font-black text-purple-800">0</span><span class="text-[9px] text-gray-500"> u</span></div>
-            <div class="stat-card stat-card-purple"><span class="text-[9px] font-bold block mb-1 text-purple-700">≤ 300</span><span id="stat-vn300" class="text-base font-black text-purple-800">0</span><span class="text-[9px] text-gray-500"> u</span></div>
           </div>
         </div>
         <div>
@@ -244,6 +237,7 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
           </div>
         </div>
       </div>
+
 
       <!-- Production Totals -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t" style="border-color:var(--srm-border)">
@@ -330,21 +324,34 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
               </div>
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Type de Réseau</label>
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-3 gap-2">
                   <label class="flex items-center justify-center p-2.5 border rounded-xl cursor-pointer text-xs font-bold hover:bg-blue-50 transition-colors" style="border-color:var(--srm-border);color:var(--srm-blue-dark)"><input type="radio" name="reseau-type-eu-ep" value="EU" class="field-type-eu-ep mr-1.5"> EU</label>
                   <label class="flex items-center justify-center p-2.5 border rounded-xl cursor-pointer text-xs font-bold hover:bg-blue-50 transition-colors" style="border-color:var(--srm-border);color:var(--srm-blue-dark)"><input type="radio" name="reseau-type-eu-ep" value="EP" class="field-type-eu-ep mr-1.5"> EP</label>
+                  <label class="flex items-center justify-center p-2.5 border rounded-xl cursor-pointer text-xs font-bold hover:bg-blue-50 transition-colors" style="border-color:var(--srm-border);color:var(--srm-blue-dark)"><input type="radio" name="reseau-type-eu-ep" value="Mix" class="field-type-eu-ep mr-1.5"> Mix</label>
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Entre R</label>
-                <input type="number" class="field-entre-r srm-input font-mono-custom" placeholder="N° du regard">
+                <input type="number" class="field-entre-r srm-input font-mono-custom" placeholder="N° regard">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur R (m)</label>
+                <input type="number" step="0.01" min="0" oninput="updateProfMoyenne(this)" class="field-entre-r-prof srm-input font-mono-custom" placeholder="0.00">
               </div>
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Et R</label>
-                <input type="number" class="field-et-r srm-input font-mono-custom" placeholder="N° du regard">
+                <input type="number" class="field-et-r srm-input font-mono-custom" placeholder="N° regard">
               </div>
+              <div>
+                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur R (m)</label>
+                <input type="number" step="0.01" min="0" oninput="updateProfMoyenne(this)" class="field-et-r-prof srm-input font-mono-custom" placeholder="0.00">
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl flex items-center justify-between" style="background:var(--srm-blue-light);border:1px solid #b8d9f0">
+              <span class="text-xs font-bold" style="color:var(--srm-blue-dark)"><i class="fa-solid fa-ruler-vertical mr-1"></i>Profondeur Moyenne</span>
+              <span class="field-prof-moyenne text-sm font-black" style="color:var(--srm-blue-dark)">0.00 m</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
@@ -359,19 +366,6 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Distance Posée (mètres linéaires)</label>
                 <input type="number" step="0.01" min="0" class="field-distance srm-input font-mono-custom" placeholder="0.00">
-              </div>
-            </div>
-            <div class="p-3 rounded-xl space-y-2" style="background:var(--srm-blue-light);border:1px solid #b8d9f0">
-              <h4 class="text-xs font-black uppercase tracking-wider pb-1 border-b" style="color:var(--srm-blue);border-color:#b8d9f0">Équipements en Vannes (optionnel)</h4>
-              <div class="grid grid-cols-2 gap-3">
-                <div class="flex items-center justify-between gap-2 bg-white p-2 rounded-lg border" style="border-color:#b8d9f0">
-                  <span class="text-sm font-semibold text-gray-700">Vanne ≤ 150 :</span>
-                  <input type="number" min="0" placeholder="0" class="field-v150 w-20 p-1.5 border rounded-lg text-center text-sm font-mono-custom" style="border-color:#b8d9f0">
-                </div>
-                <div class="flex items-center justify-between gap-2 bg-white p-2 rounded-lg border" style="border-color:#b8d9f0">
-                  <span class="text-sm font-semibold text-gray-700">Vanne ≤ 300 :</span>
-                  <input type="number" min="0" placeholder="0" class="field-v300 w-20 p-1.5 border rounded-lg text-center text-sm font-mono-custom" style="border-color:#b8d9f0">
-                </div>
               </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -396,7 +390,7 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
       <div class="srm-card overflow-hidden">
         <button onclick="toggleSection('branchements-content')" class="accordion-btn w-full flex justify-between items-center p-3.5 text-left">
           <span class="flex items-center gap-2 font-bold text-sm" style="color:var(--srm-text)">
-            <span class="section-header-icon" style="background:var(--srm-green-light);color:var(--srm-green-dark)"><i class="fa-solid fa-faucet"></i></span>
+            <span class="section-header-icon" style="background:var(--srm-green-light);color:var(--srm-green-dark)"><i class="fa-solid fa-toilet"></i></span>
             2 — Branchements Particuliers
           </span>
           <i class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform" id="branchements-content-icon"></i>
@@ -422,6 +416,12 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
               <div class="p-3 rounded-xl border" style="background:var(--srm-green-light);border-color:#b3e0ba">
                 <label class="block text-xs font-black mb-2" style="color:var(--srm-green-dark)">Branchements DN 300 (unités)</label>
                 <input type="number" min="0" placeholder="0" class="field-br-dn50 srm-input font-mono-custom bg-white">
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur (m)</label>
+                <input type="number" step="0.01" min="0" placeholder="0.00" class="field-br-profondeur srm-input font-mono-custom">
               </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -531,15 +531,27 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
                 <input type="number" step="0.01" required class="field-distance srm-input font-mono-custom" placeholder="0.00">
               </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Entre R</label>
-                <input type="number" class="field-entre-r srm-input font-mono-custom" placeholder="N° du regard">
+                <input type="number" class="field-entre-r srm-input font-mono-custom" placeholder="N° regard">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur R (m)</label>
+                <input type="number" step="0.01" min="0" oninput="updateProfMoyenne(this)" class="field-entre-r-prof srm-input font-mono-custom" placeholder="0.00">
               </div>
               <div>
                 <label class="block text-xs font-bold mb-1.5 text-gray-600">Et R</label>
-                <input type="number" class="field-et-r srm-input font-mono-custom" placeholder="N° du regard">
+                <input type="number" class="field-et-r srm-input font-mono-custom" placeholder="N° regard">
               </div>
+              <div>
+                <label class="block text-xs font-bold mb-1.5 text-gray-600">Profondeur R (m)</label>
+                <input type="number" step="0.01" min="0" oninput="updateProfMoyenne(this)" class="field-et-r-prof srm-input font-mono-custom" placeholder="0.00">
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl flex items-center justify-between" style="background:#fce7f3;border:1px solid #f9a8d4">
+              <span class="text-xs font-bold" style="color:#9d174d"><i class="fa-solid fa-ruler-vertical mr-1"></i>Profondeur Moyenne</span>
+              <span class="field-prof-moyenne text-sm font-black" style="color:#9d174d">0.00 m</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
@@ -791,7 +803,7 @@ input,select,textarea { font-size:16px!important; font-family:'Cairo',sans-serif
       <!-- CHARTS ROW 2 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="srm-card p-4">
-          <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:var(--srm-text)"><i class="fa-solid fa-faucet mr-1" style="color:var(--srm-green)"></i>Branchements réalisés (u) par projet</p>
+          <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:var(--srm-text)"><i class="fa-solid fa-toilet mr-1" style="color:var(--srm-green)"></i>Branchements réalisés (u) par projet</p>
           <div style="position:relative;height:220px;"><canvas id="chart-branch"></canvas></div>
         </div>
         <div class="srm-card p-4">
@@ -2008,6 +2020,14 @@ function toggleIdentificationsOpt(radio){
   if(radio.value==='identification'&&radio.checked){sb.classList.remove('hidden');ss.setAttribute('required','true');}
   else{sb.classList.add('hidden');ss.removeAttribute('required');ss.value='';}
 }
+function updateProfMoyenne(el){
+  const form=el.closest('form');if(!form)return;
+  const p1=parseFloat(form.querySelector('.field-entre-r-prof')?.value)||0;
+  const p2=parseFloat(form.querySelector('.field-et-r-prof')?.value)||0;
+  const disp=form.querySelector('.field-prof-moyenne');if(!disp)return;
+  const moy=(p1>0&&p2>0)?(p1+p2)/2:(p1||p2||0);
+  disp.innerText=moy.toFixed(2)+' m';
+}
 function initApp(){updateDateTime();setInterval(updateDateTime,1000);renderTable();calculateStatistics();renderProgressBars();renderBudgetTable();}
 
 // ════════════════════════════ BUDGET ════════════════════════════
@@ -2098,20 +2118,24 @@ function handleFormSubmit(e,category){
   const gps=form.querySelector('.field-gps')?.value||'';
   const sO=form.querySelector('.field-notes-select').value;const cO=form.querySelector('.field-notes-custom')?.value.trim()||'';
   const notes=sO==='Autre'?(cO?'Autre: '+cO:'Autre'):(sO||'RAS');
-  let da=[],br32=0,br50=0,remT='',ms=null,v15=0,v30=0,nBr='',entreR='',etR='',typeEuEp='';
+  let da=[],br32=0,br50=0,remT='',ms=null,v15=0,v30=0,nBr='',entreR='',etR='',typeEuEp='',profEntre=0,profEt=0,brProf=0;
   if(category==='Réseau'){
-    v15=+form.querySelector('.field-v150').value||0;v30=+form.querySelector('.field-v300').value||0;
+    v15=+form.querySelector('.field-v150')?.value||0;v30=+form.querySelector('.field-v300')?.value||0;
     if(!v15&&!v30&&!dn&&!distance){alert("Veuillez saisir le DN & la Distance ou les Vannes.");return;}
     entreR=form.querySelector('.field-entre-r')?.value.trim()||'';
     etR=form.querySelector('.field-et-r')?.value.trim()||'';
+    profEntre=+form.querySelector('.field-entre-r-prof')?.value||0;
+    profEt=+form.querySelector('.field-et-r-prof')?.value||0;
     const euEpRad=form.querySelector('input[name="reseau-type-eu-ep"]:checked');
     typeEuEp=euEpRad?euEpRad.value:'';
     if(entreR||etR)da.push('Entre R'+(entreR||'—')+' et R'+(etR||'—'));
+    if(profEntre||profEt){const pm=(profEntre>0&&profEt>0)?(profEntre+profEt)/2:(profEntre||profEt);da.push('Profondeur: '+profEntre.toFixed(2)+'m / '+profEt.toFixed(2)+'m (moy. '+pm.toFixed(2)+'m)');}
     if(typeEuEp)da.push('Type: '+typeEuEp);
     if(dn)da.push('DN '+dn);let vns=[];if(v15)vns.push('<=150: '+v15+' u');if(v30)vns.push('<=300: '+v30+' u');if(vns.length)da.push('[Vannes: '+vns.join(', ')+']');
   }else if(category==='Branchements'){
     br32=+form.querySelector('.field-br-dn32').value||0;br50=+form.querySelector('.field-br-dn50').value||0;
     nBr=form.querySelector('.field-nbranchement')?.value.trim()||'';if(nBr)da.push('N° Branchement: '+nBr);
+    brProf=+form.querySelector('.field-br-profondeur')?.value||0;if(brProf)da.push('Profondeur: '+brProf.toFixed(2)+'m');
     da.push('DN200: '+br32+' u');da.push('DN300: '+br50+' u');
   }else if(category==='Remise en état'){
     remT=form.querySelector('.field-remise-type').value;if(remT)da.push('Revêtement: '+remT);
@@ -2130,16 +2154,19 @@ function handleFormSubmit(e,category){
     if(rad){let t='Type: '+rad.value;if(rad.value==='identification'){const s=form.querySelector('.field-essai-sub-type').value;if(s)t+=' ('+s+')';}da.push(t);}
     entreR=form.querySelector('.field-entre-r')?.value.trim()||'';
     etR=form.querySelector('.field-et-r')?.value.trim()||'';
+    profEntre=+form.querySelector('.field-entre-r-prof')?.value||0;
+    profEt=+form.querySelector('.field-et-r-prof')?.value||0;
     if(entreR||etR)da.push('Entre R'+(entreR||'—')+' et R'+(etR||'—'));
+    if(profEntre||profEt){const pm=(profEntre>0&&profEt>0)?(profEntre+profEt)/2:(profEntre||profEt);da.push('Profondeur: '+profEntre.toFixed(2)+'m / '+profEt.toFixed(2)+'m (moy. '+pm.toFixed(2)+'m)');}
   }
   const details=da.join(' | ');
   const saisiePar=currentUser?(USERS[currentUser]?.displayName||currentUser):'';
   if(idInput){
     const idx=records.findIndex(r=>r.id===idInput);
-    if(idx!==-1)records[idx]={...records[idx],projet,section,details,distance,notes,br_dn32_qty:br32,br_dn50_qty:br50,nBranchement:nBr,dn,entreR,etR,typeEuEp,remise_type:remT,ms_data:ms,v150_qty:v15,v300_qty:v30,gps};
+    if(idx!==-1)records[idx]={...records[idx],projet,section,details,distance,notes,br_dn32_qty:br32,br_dn50_qty:br50,nBranchement:nBr,br_profondeur:brProf,dn,entreR,etR,typeEuEp,profEntre,profEt,remise_type:remT,ms_data:ms,v150_qty:v15,v300_qty:v30,gps};
     showToast('Enregistrement mis à jour ✓');
   }else{
-    records.push({id:'REC-'+Date.now(),timestamp:new Date().toLocaleString('fr-FR'),dateStr:new Date().toISOString().split('T')[0],saisiePar,projet,category,section,details,distance,notes,br_dn32_qty:br32,br_dn50_qty:br50,nBranchement:nBr,dn,entreR,etR,typeEuEp,remise_type:remT,ms_data:ms,v150_qty:v15,v300_qty:v30,gps});
+    records.push({id:'REC-'+Date.now(),timestamp:new Date().toLocaleString('fr-FR'),dateStr:new Date().toISOString().split('T')[0],saisiePar,projet,category,section,details,distance,notes,br_dn32_qty:br32,br_dn50_qty:br50,nBranchement:nBr,br_profondeur:brProf,dn,entreR,etR,typeEuEp,profEntre,profEt,remise_type:remT,ms_data:ms,v150_qty:v15,v300_qty:v30,gps});
     showToast('Données enregistrées avec succès ✓');
   }
   document.getElementById('sub-identification-box').classList.add('hidden');
@@ -2161,7 +2188,6 @@ function calculateStatistics(){
   });
   for(let d in dn)document.getElementById('stat-dn'+d).innerText=dn[d].toFixed(2);
   document.getElementById('stat-br-dn32').innerText=br32;document.getElementById('stat-br-dn50').innerText=br50;
-  document.getElementById('stat-vn150').innerText=vn15;document.getElementById('stat-vn300').innerText=vn30;
   document.getElementById('stat-rc200').innerText=rc20;document.getElementById('stat-rc300').innerText=rc30;
   document.getElementById('stat-total-day').innerText=day.toFixed(2);document.getElementById('stat-total-month').innerText=mon.toFixed(2);
 }
@@ -2530,8 +2556,8 @@ function editRecord(id){
   const sd=form.querySelector('.field-notes-select'),cb=form.querySelector('.custom-notes-box'),ci=form.querySelector('.field-notes-custom');
   if(r.notes&&r.notes.startsWith('Autre: ')){if(sd)sd.value='Autre';if(cb)cb.classList.remove('hidden');if(ci)ci.value=r.notes.replace('Autre: ','');}
   else{if(sd)sd.value=(r.notes==='RAS'?'':r.notes||'');if(cb)cb.classList.add('hidden');if(ci)ci.value='';}
-  if(r.category==='Réseau'){if(form.querySelector('.field-dn'))form.querySelector('.field-dn').value=r.dn||'';form.querySelector('.field-v150').value=r.v150_qty||'';form.querySelector('.field-v300').value=r.v300_qty||'';if(form.querySelector('.field-entre-r'))form.querySelector('.field-entre-r').value=r.entreR||'';if(form.querySelector('.field-et-r'))form.querySelector('.field-et-r').value=r.etR||'';const _euEp=form.querySelector('input[name="reseau-type-eu-ep"][value="'+(r.typeEuEp||'')+'"]');if(_euEp)_euEp.checked=true;}
-  else if(r.category==='Branchements'){form.querySelector('.field-br-dn32').value=r.br_dn32_qty||'';form.querySelector('.field-br-dn50').value=r.br_dn50_qty||'';if(form.querySelector('.field-nbranchement'))form.querySelector('.field-nbranchement').value=r.nBranchement||'';}
+  if(r.category==='Réseau'){if(form.querySelector('.field-dn'))form.querySelector('.field-dn').value=r.dn||'';if(form.querySelector('.field-v150'))form.querySelector('.field-v150').value=r.v150_qty||'';if(form.querySelector('.field-v300'))form.querySelector('.field-v300').value=r.v300_qty||'';if(form.querySelector('.field-entre-r'))form.querySelector('.field-entre-r').value=r.entreR||'';if(form.querySelector('.field-et-r'))form.querySelector('.field-et-r').value=r.etR||'';if(form.querySelector('.field-entre-r-prof'))form.querySelector('.field-entre-r-prof').value=r.profEntre||'';if(form.querySelector('.field-et-r-prof'))form.querySelector('.field-et-r-prof').value=r.profEt||'';const _pmEl=form.querySelector('.field-entre-r-prof');if(_pmEl)updateProfMoyenne(_pmEl);const _euEp=form.querySelector('input[name="reseau-type-eu-ep"][value="'+(r.typeEuEp||'')+'"]');if(_euEp)_euEp.checked=true;}
+  else if(r.category==='Branchements'){form.querySelector('.field-br-dn32').value=r.br_dn32_qty||'';form.querySelector('.field-br-dn50').value=r.br_dn50_qty||'';if(form.querySelector('.field-nbranchement'))form.querySelector('.field-nbranchement').value=r.nBranchement||'';if(form.querySelector('.field-br-profondeur'))form.querySelector('.field-br-profondeur').value=r.br_profondeur||'';}
   else if(r.category==='Remise en état'&&form.querySelector('.field-remise-type'))form.querySelector('.field-remise-type').value=r.remise_type||'';
   else if(r.category==='Mise en service'&&r.ms_data){
     form.querySelector('.field-ms-dn32-jonction').value=r.ms_data.j32||'';form.querySelector('.field-ms-dn32-c1').value=r.ms_data.c1_32||'';form.querySelector('.field-ms-dn32-c2').value=r.ms_data.c2_32||'';form.querySelector('.field-ms-dn32-c3').value=r.ms_data.c3_32||'';
@@ -3473,7 +3499,7 @@ function mpRenderKPI(results){
 
   const kpis = [
     {label:'Réseau total posé', val: totalL.toFixed(1)+' m', icon:'fa-pipe', col:'var(--srm-blue)'},
-    {label:'Branchements total', val: totalB+' u', icon:'fa-faucet', col:'var(--srm-green)'},
+    {label:'Branchements total', val: totalB+' u', icon:'fa-toilet', col:'var(--srm-green)'},
     {label:'Remise en état total', val: totalRem.toFixed(1)+' m', icon:'fa-road', col:'var(--srm-orange)'},
     {label:'Avancement moyen global', val: avgGlobal.toFixed(1)+'%', icon:'fa-gauge-high', col:'#7c3aed'},
     {label:'Budget consommé', val: totalBudgetCible>0?mpFmtDH(totalConsomme):'—', icon:'fa-sack-dollar', col:'#d97706', sub: totalBudgetCible>0?(pctBudgetGlobal.toFixed(1)+'% de '+mpFmtDH(totalBudgetCible)):'Aucun budget renseigné'},
